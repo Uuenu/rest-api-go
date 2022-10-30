@@ -28,6 +28,7 @@ func main() {
 	handler.Register(router)
 
 	start(router, cfg)
+
 }
 
 func start(router *httprouter.Router, cfg *config.Config) {
@@ -53,7 +54,7 @@ func start(router *httprouter.Router, cfg *config.Config) {
 
 	} else {
 		logger.Info("Listen tcp")
-		listener, listenErr = net.Listen("tcp", fmt.Sprintf("%s %s", cfg.Listen.BindIP, cfg.Listen.Port))
+		listener, listenErr = net.Listen("tcp", fmt.Sprintf("%s:%s", cfg.Listen.BindIP, cfg.Listen.Port))
 		logger.Infof("server is listening port %s%s", cfg.Listen.BindIP, cfg.Listen.Port)
 
 	}
@@ -69,4 +70,5 @@ func start(router *httprouter.Router, cfg *config.Config) {
 	}
 
 	logger.Fatal(server.Serve(listener))
+
 }
