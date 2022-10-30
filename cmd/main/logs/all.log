@@ -1,0 +1,4 @@
+time="2022-10-30T17:28:05+03:00" level=info msg="create router" func="main.main()" file="app.go 21"
+time="2022-10-30T17:28:05+03:00" level=info msg="read application configuration" func="rest-api-go/internal/config.GetConfig.func1()" file="config.go 25"
+time="2022-10-30T17:28:05+03:00" level=info func="rest-api-go/internal/config.GetConfig.func1()" file="config.go 29"
+time="2022-10-30T17:28:05+03:00" level=fatal msg="open config.yml: The system cannot find the file specified." func="rest-api-go/internal/config.GetConfig.func1()" file="config.go 30"
