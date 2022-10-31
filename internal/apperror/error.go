@@ -6,6 +6,7 @@ import (
 
 var (
 	ErrNotFound = NewAppError(nil, "not found", "", "US-000003")
+	ErrTest     = NewAppError(nil, "test", "devel text", "TEST-******")
 )
 
 type AppError struct {
