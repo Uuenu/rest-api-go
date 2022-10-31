@@ -13,7 +13,16 @@ type Config struct {
 		Type   string `yaml:"type"`
 		BindIP string `yaml:"bind_ip"`
 		Port   string `yaml:"port"`
-	}
+	} `yaml:"listen"`
+	Mongodb struct {
+		Host       string `yaml:"host"`
+		Port       string `yaml:"port"`
+		Database   string `yaml:"database"`
+		AuthDb     string `yaml:"authdb"`
+		Username   string `yaml:"username"`
+		Password   string `yaml:"password"`
+		Collection string `yaml:"collection"`
+	} `yaml:"mongodb"`
 }
 
 var instance *Config
@@ -24,7 +33,7 @@ func GetConfig() *Config {
 		logger := logging.GetLogger()
 		logger.Info("read application configuration")
 		instance = &Config{}
-		if err := cleanenv.ReadConfig("../../config.yml", instance); err != nil {
+		if err := cleanenv.ReadConfig("config.yml", instance); err != nil {
 			help, _ := cleanenv.GetDescription(instance, nil)
 			logger.Info(help)
 			logger.Fatal(err)

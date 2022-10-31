@@ -11,11 +11,11 @@ import (
 func NewClient(ctx context.Context, host, port, username, password, database, authDB string) (db *mongo.Database, err error) {
 	var mongodbURL string
 	var isAuth bool
-	if username == "" && password == " " {
-		mongodbURL = fmt.Sprintf("mongodb://%s%s", host, port)
+	if username == "" && password == "" {
+		mongodbURL = fmt.Sprintf("mongodb://%s:%s", host, port)
 	} else {
 		isAuth = true
-		mongodbURL = fmt.Sprintf("mongodb://%s%s@%s%s", username, password, host, port)
+		mongodbURL = fmt.Sprintf("mongodb://%s:%s@%s:%s", username, password, host, port)
 	}
 
 	clientOptions := options.Client().ApplyURI(mongodbURL)

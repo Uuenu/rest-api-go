@@ -55,10 +55,10 @@ func init() {
 		DisableColors: false,
 		FullTimestamp: true,
 	}
-	err := os.Mkdir("logs", 0644)
-	if err != nil {
-		panic(err)
-	}
+	// err := os.Mkdir("logs", 0644)
+	// if err != nil {
+	// 	panic(err)
+	// }
 	allFile, err := os.OpenFile("logs/all.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0777)
 	if err != nil {
 		panic(err)
