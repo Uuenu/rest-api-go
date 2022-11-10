@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"net"
 	"net/http"
@@ -11,6 +12,8 @@ import (
 
 	"rest-api-go/internal/config"
 	"rest-api-go/internal/user"
+	"rest-api-go/internal/user/db"
+	"rest-api-go/pkg/client/mongodb"
 	"rest-api-go/pkg/logging"
 
 	"github.com/julienschmidt/httprouter"
@@ -23,22 +26,22 @@ func main() {
 
 	cfg := config.GetConfig()
 
-	// cfgMongodb := cfg.Mongodb
-	// logger.Infof("cfgMongodb.Username: %s", cfgMongodb.Username)
+	cfgMongodb := cfg.Mongodb
+	logger.Infof("cfgMongodb.Username: %s", cfgMongodb.Username)
 
-	// mongoDbClient, err := mongodb.NewClient(context.Background(), cfgMongodb.Host, cfgMongodb.Port, cfgMongodb.Username,
-	// 	cfgMongodb.Password, cfgMongodb.Database, cfgMongodb.AuthDb)
-	// if err != nil {
-	// 	panic(err)
-	// }
+	mongoDbClient, err := mongodb.NewClient(context.Background(), cfgMongodb.Host, cfgMongodb.Port, cfgMongodb.Username,
+		cfgMongodb.Password, cfgMongodb.Database, cfgMongodb.AuthDb)
+	if err != nil {
+		panic(err)
+	}
 
-	// storage := db.NewStorage(mongoDbClient, cfgMongodb.Collection, logger)
+	storage := db.NewStorage(mongoDbClient, cfgMongodb.Collection, logger)
 
-	// users, err := storage.FindAll(context.Background())
-	// fmt.Println(users)
-	// if err != nil {
-	// 	panic(err)
-	// }
+	users, err := storage.FindAll(context.Background())
+	fmt.Println(users)
+	if err != nil {
+		panic(err)
+	}
 
 	logger.Info("register user handler")
 	handler := user.NewHandler(logger)

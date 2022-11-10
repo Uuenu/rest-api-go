@@ -7,6 +7,14 @@ import (
 	"github.com/ilyakaznacheev/cleanenv"
 )
 
+type StorageConfig struct {
+	Host     string `yaml:"host"`
+	Port     string `yaml:"port"`
+	Database string `yaml:"database"`
+	Username string `yaml:"username"`
+	Password string `yaml:"password"`
+}
+
 type Config struct {
 	IsDebug *bool `yaml:"is_debug"`
 	Listen  struct {
@@ -23,6 +31,8 @@ type Config struct {
 		Password   string `yaml:"password"`
 		Collection string `yaml:"collection"`
 	} `yaml:"mongodb"`
+
+	Storage StorageConfig `yaml:"postgressql"`
 }
 
 var instance *Config
