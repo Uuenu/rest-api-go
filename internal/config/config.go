@@ -32,7 +32,7 @@ type Config struct {
 		Collection string `yaml:"collection"`
 	} `yaml:"mongodb"`
 
-	Storage StorageConfig `yaml:"postgressql"`
+	Storage StorageConfig `yaml:"postgresql"`
 }
 
 var instance *Config

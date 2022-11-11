@@ -13,10 +13,10 @@ mongodb:
   username:
   password:
   collection: users
-postgressql:
+postgresql:
   host: localhost
   port: 5432
   database: go-rest-api
-  username: 
+  username: postgres
   password: qwerty
   

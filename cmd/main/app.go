@@ -10,10 +10,12 @@ import (
 	"path/filepath"
 	"time"
 
+	author "rest-api-go/internal/author/db"
 	"rest-api-go/internal/config"
 	"rest-api-go/internal/user"
 	"rest-api-go/internal/user/db"
 	"rest-api-go/pkg/client/mongodb"
+	"rest-api-go/pkg/client/postgresql"
 	"rest-api-go/pkg/logging"
 
 	"github.com/julienschmidt/httprouter"
@@ -26,6 +28,25 @@ func main() {
 
 	cfg := config.GetConfig()
 
+	//Postgresql
+	postgreClient, err := postgresql.NewClient(context.TODO(), 3, cfg.Storage)
+	if err != nil {
+		logger.Fatal("%v", err)
+	}
+
+	repository := author.NewRepository(postgreClient, logger)
+
+	authors, err := repository.FindAll(context.TODO())
+	if err != nil {
+		logger.Fatal("%v", err)
+	}
+
+	for _, ath := range authors {
+		logger.Infof("%v", ath)
+		fmt.Printf("%v \n", ath)
+	}
+
+	// MongoDB
 	cfgMongodb := cfg.Mongodb
 	logger.Infof("cfgMongodb.Username: %s", cfgMongodb.Username)
 
